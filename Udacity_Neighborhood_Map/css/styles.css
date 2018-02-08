@@ -1,0 +1,17 @@
+#headerBar{
+  background-color: #626060;
+  color: white;
+  padding-bottom: 2px;
+
+}
+#content{
+  background-color: #928B8B;
+}
+#sideBar{
+  background-color: #928B8B;
+  height:100%;
+}
+#googleMap{
+  background-color: #DADBC0;
+  height: 100%;
+}
