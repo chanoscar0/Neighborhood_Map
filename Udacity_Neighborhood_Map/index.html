@@ -8,7 +8,6 @@
     <!--Link to the stylesheet-->
     <link rel="stylesheet" href="css/styles.css">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css" integrity="sha384-rwoIResjU2yc3z8GV/NPeZWAv56rSmLldC3R/AZzGRnGxQQKnKkoFVhFQhNUwEyJ" crossorigin="anonymous">
-
 </head>
 <body>
   <div class = 'container-fluid' id = headerBar>
@@ -17,16 +16,19 @@
   <div class = 'container-fluid' id = content>
     <div class = 'row'>
       <div class = 'col-3' id = sideBar>
-        <p>This is where the locations list will populate</p>
+        <input type="text" class="form-control list-group-item" placeholder = "Address, City, State, Zip" aria-label="Small" aria-describedby="inputGroup-sizing-sm">
+        <br>
+        <ul class="list-group" data-bind = "foreach: locationList">
+          <li class = 'list-group-item' data-bind = "text: title">
+        </ul>
       </div>
       <div class = 'col' id = googleMap>
       </div>
     </div>
 
-
-
-
-
-
-
+    <script src="js/libs/knockout-3.2.0.js"></script>
+    <script src="js/script.js"></script>
+    <script async defer
+        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyACOA2XHH4tK1vb-AZh7BFgXZzAnjxEwVM&v=3&callback=initMap">
+    </script>
 </body>

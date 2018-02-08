@@ -4,6 +4,9 @@
   padding-bottom: 2px;
 
 }
+#filterButton{
+  float: left;
+}
 #content{
   background-color: #928B8B;
 }
