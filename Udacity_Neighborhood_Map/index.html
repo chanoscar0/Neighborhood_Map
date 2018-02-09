@@ -11,7 +11,7 @@
 </head>
 <body>
   <div class = 'container-fluid' id = headerBar>
-    <h1>Welcome to the Neighborhood my friends!</h1>
+    <h1>Welcome to My Neighborhood</h1>
   </div>
   <div class = 'container-fluid' id = content>
     <div class = 'row'>
@@ -19,7 +19,8 @@
         <input type="text" class="form-control list-group-item" placeholder = "Address, City, State, Zip" aria-label="Small" aria-describedby="inputGroup-sizing-sm">
         <br>
         <ul class="list-group" data-bind = "foreach: locationList">
-          <li class = 'list-group-item' data-bind = "text: title">
+          <li class = 'list-group-item' data-bind = "text: title, click: $parent.setCurrentLocation,
+           css:{active: $parent.currentLocation() === $data}"></li>
         </ul>
       </div>
       <div class = 'col' id = googleMap>
@@ -32,3 +33,4 @@
         src="https://maps.googleapis.com/maps/api/js?key=AIzaSyACOA2XHH4tK1vb-AZh7BFgXZzAnjxEwVM&v=3&callback=initMap">
     </script>
 </body>
+<span class="label" data-bind="text: isApproved, css: isApproved() == true ? 'label-success' : 'label-important'"></span>
