@@ -12,6 +12,7 @@ var locations = [
 var ViewModel = function(){
   //Set all variables for globals that will be needed
   var map;
+  var bouncingMarker = null;
   var markers = [];
   var self = this;
   self.filterOptions = ['None','Newport Beach','Anaheim','Los Angeles','San Diego'];
@@ -55,6 +56,16 @@ var ViewModel = function(){
         marker.addListener('click', function() {
           populateInfoWindow(this, infoWindow);
         });
+      marker.addListener('click', function(){
+        if(bouncingMarker)
+          bouncingMarker.setAnimation(null);
+        if(bouncingMarker != this) {
+          this.setAnimation(google.maps.Animation.BOUNCE);
+          bouncingMarker = this;
+        }      else
+          bouncingMarker = null;
+        });
+
 
         // Two event listeners - one for mouseover, one for mouseout,
         // to change the colors back and forth.
