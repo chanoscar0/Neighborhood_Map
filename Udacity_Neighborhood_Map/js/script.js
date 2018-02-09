@@ -115,8 +115,8 @@ var ViewModel = function(){
           new google.maps.Size(21,34));
         return markerImage;
       }
-    }
 
+    }
 
   self.filteredItems = ko.computed(function(){
     var filter = self.selectedFilter();
@@ -128,6 +128,20 @@ var ViewModel = function(){
       });
     }
   });
+    self.filterMarkers = function(category){
+      for (i = 0; i < markers.length; i++) {
+        marker = markers[i];
+        // If is same category or category not picked
+
+        if(marker.category == self.selectedFilter() || self.selectedFilter() == "None"){
+            marker.setVisible(true);
+        }
+        // Categories don't match
+        else {
+            marker.setVisible(false);
+        }
+    }
+  }
 
     self.setCurrentLocation = function(clickedLocation){
       self.currentLocation(clickedLocation);

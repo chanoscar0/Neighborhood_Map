@@ -17,7 +17,7 @@
     <div class = 'row'>
       <div class = 'col-3' id = sideBar>
           <p>Select a City Filter:
-              <select data-bind="value: selectedFilter, options: filterOptions">
+              <select data-bind="value: selectedFilter, options: filterOptions, event:  {change: filterMarkers}">
 
               </select>
             </p>
