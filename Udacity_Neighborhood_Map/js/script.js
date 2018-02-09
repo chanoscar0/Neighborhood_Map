@@ -51,6 +51,7 @@ var ViewModel = function(){
           icon: defaultIcon
         });
         markers.push(marker);
+        self.locationList()[i].marker = marker;
         marker.addListener('click', function() {
           populateInfoWindow(this, infoWindow);
         });
@@ -75,6 +76,7 @@ var ViewModel = function(){
           });
       }
     }
+
       function showLocations() {
             // Extend the boundaries of the map for each marker and display the marker
             for (var i = 0; i < markers.length; i++) {
@@ -83,6 +85,7 @@ var ViewModel = function(){
             }
             map.fitBounds(bounds);
       }
+
       function hideLocations(){
         //Hide all the markers on the map
         for (var i=0; i <markers.length; i++) {
@@ -117,9 +120,8 @@ var ViewModel = function(){
 
     self.setCurrentLocation = function(clickedLocation){
       self.currentLocation(clickedLocation);
-
-    };
-
+      google.maps.event.trigger(clickedLocation.marker, 'click');
+}
     self.setcurrentFilter = function(clickedFilter){
       self.currentFilter(clickedFilter);
     }
