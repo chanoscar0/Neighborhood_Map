@@ -16,9 +16,12 @@
   <div class = 'container-fluid' id = content>
     <div class = 'row'>
       <div class = 'col-3' id = sideBar>
-        <input type="text" class="form-control list-group-item" placeholder = "Address, City, State, Zip" aria-label="Small" aria-describedby="inputGroup-sizing-sm">
-        <br>
-        <ul class="list-group" data-bind = "foreach: locationList">
+          <p>Select a City Filter:
+              <select data-bind="value: selectedFilter, options: filterOptions">
+
+              </select>
+            </p>
+        <ul class="list-group" data-bind = "foreach: filteredItems">
           <li class = 'list-group-item' data-bind = "text: title, click: $parent.setCurrentLocation,
            css:{active: $parent.currentLocation() === $data}"></li>
         </ul>
