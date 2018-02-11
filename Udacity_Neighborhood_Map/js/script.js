@@ -1,12 +1,12 @@
 
 var locations = [
-  {title: 'Disneyland Park', location: {lat: 33.812511, lng: -117.918976}, city: 'Anaheim'},
-  {title: 'Universal Studios', location: {lat: 34.1381, lng: -118.3534}, city: 'Los Angeles'},
-  {title: 'Angel Stadium', location: {lat: 33.8366, lng: -117.9143}, city: 'Anaheim'},
-  {title: 'Dodgers Stadium', location: {lat: 34.0739, lng: -118.2400}, city: 'Los Angeles'},
+  {title: 'Disneyland Park', location: {lat: 33.8, lng: -117.9}, city: 'Anaheim'},
+  {title: 'Universal Studios', location: {lat: 34.138, lng: -118.353}, city: 'Los Angeles'},
+  {title: 'Angel Stadium', location: {lat: 33.8003, lng: -117.8827}, city: 'Anaheim'},
+  {title: 'Dodger Stadium', location: {lat: 34.0739, lng: -118.2400}, city: 'Los Angeles'},
   {title: 'Staples Center', location: {lat: 34.0430, lng: -118.2673}, city: 'Los Angeles'},
   {title: 'Fashion Island', location: {lat: 33.6159, lng: -117.8758}, city: 'Newport Beach'},
-  {title: 'SeaWorld', location: {lat: 33.468986, lng: -117.673389}, city: 'San Diego'},
+  {title: 'SeaWorld', location: {lat: 32.7648, lng: -117.2266}, city: 'San Diego'},
   {title: 'LegoLand', location: {lat: 33.126205, lng: -117.311606}, city: 'San Diego'}
 ];
 var ViewModel = function(){
