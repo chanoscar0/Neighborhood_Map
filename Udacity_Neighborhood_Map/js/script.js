@@ -56,17 +56,17 @@ var ViewModel = function(){
         });
         markers.push(marker);
         self.locationList()[i].marker = marker;
-      marker.addListener('click', function() {
-          populateInfoWindow(this, infoWindow);
-        });
-      marker.addListener('click', function(){
-        if(bouncingMarker)
-          bouncingMarker.setAnimation(null);
-        if(bouncingMarker != this) {
-          this.setAnimation(google.maps.Animation.BOUNCE);
-          bouncingMarker = this;
-        }      else
-          bouncingMarker = null;
+        marker.addListener('click', function() {
+            populateInfoWindow(this, infoWindow);
+            });
+        marker.addListener('click', function(){
+          if(bouncingMarker)
+            bouncingMarker.setAnimation(null);
+          if(bouncingMarker != this) {
+            this.setAnimation(google.maps.Animation.BOUNCE);
+            bouncingMarker = this;
+          }      else
+            bouncingMarker = null;
         });
         // Two event listeners - one for mouseover, one for mouseout,
         // to change the colors back and forth.
@@ -103,8 +103,8 @@ var ViewModel = function(){
           async: true,
           //If server is reachable, dissect the JSON response to the information we need
           success: function(data){
-            venueID = data['response']['venues'][0].id;
-            var result = data['response']['venues'][0];
+            venueID = data.response.venues[0].id;
+            var result = data.response.venues[0];
             var locationName = result.name;
             var locationFormattedAddress = result.location.formattedAddress;
             contentString = locationName + ' is located at ' +
@@ -125,10 +125,10 @@ var ViewModel = function(){
               async: true,
 
               success: function(data){
-                if (data['response']['photos']['items'].length == 0){
+                if (data.response.photos.items.length === 0){
                   alert("Sorry, we could not load photo for this location.");
                 } else{
-                  var resultPhotos = data['response']['photos']['items'][0];
+                  var resultPhotos = data.response.photos.items[0];
                   var prefix = resultPhotos.prefix;
                   var suffix = resultPhotos.suffix;
                   var width = resultPhotos.width;
@@ -187,12 +187,12 @@ var ViewModel = function(){
         return markerImage;
       }
 
-    }
+    };
 //computed function in knockout to display the filtered or unfiltered list
   self.filteredItems = ko.computed(function(){
     var filter = self.selectedFilter();
     if(!filter || filter == "None"){
-      return self.locationList()
+      return self.locationList();
     } else{
       return ko.utils.arrayFilter(self.locationList(), function(i){
         return i.city == filter;
@@ -213,16 +213,16 @@ var ViewModel = function(){
             marker.setVisible(false);
         }
     }
-  }
+  };
     //Set's current location
     self.setCurrentLocation = function(clickedLocation){
       self.currentLocation(clickedLocation);
       google.maps.event.trigger(clickedLocation.marker, 'click');
-}   //Set's current filter
+};   //Set's current filter
     self.setcurrentFilter = function(clickedFilter){
       self.currentFilter(clickedFilter);
-    }
-}
+    };
+};
 var VM = new ViewModel();
 
 ko.applyBindings(VM);
