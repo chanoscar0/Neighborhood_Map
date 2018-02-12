@@ -1,4 +1,3 @@
-
 var locations = [
   {title: 'Disneyland Park', location: {lat: 33.8121, lng: -117.9190}, city: 'Anaheim'},
   {title: 'Universal Studios', location: {lat: 34.138, lng: -118.353}, city: 'Los Angeles'},
@@ -56,6 +55,10 @@ var ViewModel = function(){
         });
         markers.push(marker);
         self.locationList()[i].marker = marker;
+        addListeners(marker,infoWindow);
+      }
+
+      function addListeners(marker, infowindow){
         marker.addListener('click', function() {
             populateInfoWindow(this, infoWindow);
             });
@@ -77,7 +80,6 @@ var ViewModel = function(){
           this.setIcon(defaultIcon);
         });
       }
-
       function populateInfoWindow(marker, infowindow){
         var lat =0;
         var lng = 0;
