@@ -14,6 +14,8 @@ var ViewModel = function(){
   var map;
   var bouncingMarker = null;
   var contentString;
+  var imageString;
+  var venueID;
   var markers = [];
   var self = this;
   self.filterOptions = ['None','Newport Beach','Anaheim','Los Angeles','San Diego'];
@@ -85,11 +87,11 @@ var ViewModel = function(){
             lng = locations[i].location.lng;
           }
         }
-        var foursquareURL = 'https://api.foursquare.com/v2/venues/search?' ;
+        var foursquareURLSearch = 'https://api.foursquare.com/v2/venues/search?' ;
         var clientID = 'WDOUKNQBEJPN0T1APND43KYKGEHI2SGPMG5RH3EUG4MDSA5O';
         var clientSecret = "5SNYDXL0BZNGWZP5XEQZGLWLCZ04FMTS3GNYS4HGLSGF0D54";
         $.ajax({
-          url: foursquareURL,
+          url: foursquareURLSearch,
           dataType: 'json',
           data: 'll=' + lat + ',' + lng +
                 '&limit=1' +
@@ -100,21 +102,41 @@ var ViewModel = function(){
           async: true,
 
           success: function(data){
-
+            venueID = data['response']['venues'][0].id;
             var result = data['response']['venues'][0];
             var locationName = result.name;
             var locationFormattedAddress = result.location.formattedAddress;
             contentString = locationName + ' is located at ' + locationFormattedAddress[0]
             +' ' + locationFormattedAddress[1] + ' ' + locationFormattedAddress[2];
-            if (infowindow.marker != marker) {
-              infowindow.marker = marker;
-              infowindow.setContent('<div>' + contentString + '</div>');
-              infowindow.open(map, marker);
-              // Make sure the marker property is cleared if the infowindow is closed.
-              infowindow.addListener('closeclick', function() {
-                infowindow.marker = null;
-              });
-            }
+            $.ajax({
+              url: "https://api.foursquare.com/v2/venues/" + venueID + "/photos?",
+              dataType: 'json',
+              data: '&client_id=' + clientID +
+                    '&client_secret=' + clientSecret +
+                    '&v=20170801' +
+                    '&m=foursquare',
+              async: true,
+
+              success: function(data){
+                var resultPhotos = data['response']['photos']['items'][0];
+                var prefix = resultPhotos.prefix;
+                var suffix = resultPhotos.suffix;
+                var width = resultPhotos.width;
+                var height = resultPhotos.height;
+                imageString = prefix + '100x100' + suffix;
+                if (infowindow.marker != marker) {
+                  infowindow.marker = marker;
+                  infowindow.maxWidth = 50;
+                  infowindow.setContent("<div style= 'float:left;'>" + "<img src = " + imageString + "></div><div style = 'content:center'>"  + contentString + '</div>' );
+                  infowindow.open(map, marker);
+                  // Make sure the marker property is cleared if the infowindow is closed.
+                  infowindow.addListener('closeclick', function() {
+                    infowindow.marker = null;
+                  });
+                }
+              }
+            });
+
           },
           fail: function(response){
             alert("Error, we could not load the fourSquare data for this location. ")
