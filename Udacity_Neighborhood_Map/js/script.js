@@ -7,6 +7,10 @@ var locations = [
   {title: 'SeaWorld', location: {lat: 32.7648, lng: -117.2266}, city: 'San Diego'},
   {title: 'LegoLand', location: {lat: 33.126205, lng: -117.311606}, city: 'San Diego'}
 ];
+
+function googleMapsFail(){
+  alert ("Google Maps failed to load, please refresh and try again.");
+}
 var ViewModel = function(){
   //Set all variables for globals that will be needed
   var map;
@@ -38,7 +42,6 @@ var ViewModel = function(){
       var defaultIcon = makeMarkerIcon("E3E8F8");
       var highlightedIcon = makeMarkerIcon("203562");
 
-
       for (var i = 0; i < locations.length; i++) {
         // Get the position from the location array.
         var position = locations[i].location;
@@ -68,8 +71,9 @@ var ViewModel = function(){
           if(bouncingMarker != this) {
             this.setAnimation(google.maps.Animation.BOUNCE);
             bouncingMarker = this;
-          }      else
-            bouncingMarker = null;
+          }else{
+              bouncingMarker = null;
+          }
         });
         // Two event listeners - one for mouseover, one for mouseout,
         // to change the colors back and forth.
@@ -105,6 +109,7 @@ var ViewModel = function(){
           async: true,
           //If server is reachable, dissect the JSON response to the information we need
           success: function(data){
+            console.log('hi');
             venueID = data.response.venues[0].id;
             var result = data.response.venues[0];
             var locationName = result.name;
@@ -127,6 +132,7 @@ var ViewModel = function(){
               async: true,
 
               success: function(data){
+                console.log('hi');
                 if (data.response.photos.items.length === 0){
                   alert("Sorry, we could not load photo for this location.");
                 } else{
@@ -150,12 +156,22 @@ var ViewModel = function(){
                     });
                 }
               }
+            },
+              error: function(jqXHR, textStatus){
+                console.log('hi');
+                contentString = "Sorry, we could not load the photos from Foursquare <br><br>" + contentString;
+                infowindow.setContent(contentString);
+                infowindow.open(map, marker);
+
               }
             });
           },
           //If foursquare is not reachable, alert that an error has occurred.
-          fail: function(response){
-            alert("Error, we could not load the fourSquare data for this location. ");
+          error: function(jqXHR, textStatus){
+            console.log('hi');
+            infowindow.setContent("Error, we could not load the fourSquare data for this location.");
+            infowindow.open(map, marker);
+
           }
       });
     }
@@ -219,7 +235,12 @@ var ViewModel = function(){
     //Set's current location
     self.setCurrentLocation = function(clickedLocation){
       self.currentLocation(clickedLocation);
-      google.maps.event.trigger(clickedLocation.marker, 'click');
+      try {
+        google.maps.event.trigger(clickedLocation.marker, 'click');
+      }
+      catch(err) {
+        alert("Google Maps could not load, please refresh and try again. Check your URL.");
+      }
 };   //Set's current filter
     self.setcurrentFilter = function(clickedFilter){
       self.currentFilter(clickedFilter);
