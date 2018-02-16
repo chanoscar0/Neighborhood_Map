@@ -9,3 +9,5 @@ All of the information in the pop-up window was drawn from the Foursquare API.
 
 This application is meant to showcase my abilities in the design concepts for front-end frameworks like Knockout.js while working with the Google Maps API.
 
+In the future, I would like to modify this file to utilize frameworks like React or Angular JS.
+
