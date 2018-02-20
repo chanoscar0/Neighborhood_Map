@@ -1,6 +1,10 @@
 # Neighborhood_Map
 Neighborhood Map Application that demonstrates capabilities with APIs and MVC Frameworks. The application includes a menu on the left of the screen to help filter the markers and infowindows that appear on the google map that is in the right section of the screen. This application was meant to serve information from various APIs on the web through the Google Maps application to the user. I decided to use the Foursquare API to serve this information.
 
+# Purpose
+
+The purpose of this project was for a part of the Udacity Full Stack Web Developer Course. The purpose of this project was to demonstrate my understanding of Full-stack development, from Authentication vs. Authorization, to the Back-end routing of a web application, to the front-end styling templates and how all of them interact and connect with one another to make a fully functional web application.
+
 # Running the Application
 
 In order to run the application, just open the index.html file in a web browser.
