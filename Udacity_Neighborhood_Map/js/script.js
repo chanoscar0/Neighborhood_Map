@@ -132,10 +132,20 @@ var ViewModel = function(){
               async: true,
 
               success: function(data){
-                console.log('hi');
-                if (data.response.photos.items.length === 0){
-                  alert("Sorry, we could not load photo for this location.");
-                } else{
+                if (data.response.photos.items.length == 0){
+                  imageString = "<div style = float:left;> Could not load photo.</div><br>"
+                  contentString = imageString + contentString;
+                  if (infowindow.marker != marker) {
+                    infowindow.marker = marker;
+                    infowindow.setContent(contentString);
+                    infowindow.open(map, marker);
+                    /* Make sure the marker property is cleared if the
+                    infowindow is closed.*/
+                    infowindow.addListener('closeclick', function() {
+                      infowindow.marker = null;
+                    });
+                  }
+                }else{
                   var resultPhotos = data.response.photos.items[0];
                   var prefix = resultPhotos.prefix;
                   var suffix = resultPhotos.suffix;
@@ -154,8 +164,8 @@ var ViewModel = function(){
                     infowindow.addListener('closeclick', function() {
                       infowindow.marker = null;
                     });
+                  }
                 }
-              }
             },
               error: function(jqXHR, textStatus){
                 console.log('hi');
