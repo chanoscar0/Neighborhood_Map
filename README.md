@@ -26,6 +26,8 @@ One of the primary challenges I had with this project was the organization in th
 
 Another challenge that I faced was around the filtering of the list elements. I found it a bit challenging to set the current location appropriately based off of the list, but I got around this by using a computed function in the Knockout Framework to apply the filter to the list elements.
 
+# Screenshot
 
+![](https://github.com/chanoscar0/Neighborhood_Map/blob/master/Screen%20Shot%202018-02-21%20at%2012.57.05%20PM.png)
 
 
