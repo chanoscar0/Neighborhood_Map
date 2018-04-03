@@ -13,18 +13,18 @@
   <!--Container for the contentList-->
   <div class = 'container-fluid' id = content>
     <div class = 'row'>
-      <div class = 'col-3' id = sideBar>
+      <div class = 'col-md-5 col-xs-4' id = sideBar>
           <p style = "color: white;">Select a City Filter:
               <select data-bind="value: selectedFilter, options: filterOptions, event:  {change: filterMarkers}">
               </select>
             </p>
+            <p style = 'color:white;'>All data in the infowindows are provided by the foursquare API.</p>
+
             <!--List of all locations in application-->
         <ul class="list-group" data-bind = "foreach: filteredItems">
           <li class = 'list-group-item' data-bind = "text: title, click: $parent.setCurrentLocation,
            css:{active: $parent.currentLocation() === $data}"></li>
         </ul>
-        <p style = 'color:white;'>All data in the infowindows are provided by the foursquare API.</p>
-
       </div>
       <div class = 'col' id = googleMap>
       </div>

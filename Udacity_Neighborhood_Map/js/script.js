@@ -74,6 +74,7 @@ var ViewModel = function(){
           }else{
               bouncingMarker = null;
           }
+
         });
         // Two event listeners - one for mouseover, one for mouseout,
         // to change the colors back and forth.
@@ -109,7 +110,6 @@ var ViewModel = function(){
           async: true,
           //If server is reachable, dissect the JSON response to the information we need
           success: function(data){
-            console.log('hi');
             venueID = data.response.venues[0].id;
             var result = data.response.venues[0];
             var locationName = result.name;
@@ -162,7 +162,10 @@ var ViewModel = function(){
                     /* Make sure the marker property is cleared if the
                     infowindow is closed.*/
                     infowindow.addListener('closeclick', function() {
+                      infowindow.marker.setAnimation(null);
+
                       infowindow.marker = null;
+
                     });
                   }
                 }
